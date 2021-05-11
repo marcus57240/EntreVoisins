@@ -1,11 +1,14 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +23,16 @@ import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class NeighbourFragment extends Fragment {
+public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerViewAdapter.OnItemClickListener {
 
     private NeighbourApiService mApiService;
-    private List<Neighbour> mNeighbours;
+    private List<Neighbour> mNeighbours = new ArrayList<>();
     private RecyclerView mRecyclerView;
+    private MyNeighbourRecyclerViewAdapter mMyNeighbourRecyclerViewAdapter;
 
 
 
@@ -54,19 +59,19 @@ public class NeighbourFragment extends Fragment {
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        mMyNeighbourRecyclerViewAdapter = new MyNeighbourRecyclerViewAdapter(mApiService.getNeighbours(), (MyNeighbourRecyclerViewAdapter.OnItemClickListener) this);
+        mRecyclerView.setAdapter(mMyNeighbourRecyclerViewAdapter);
         return view;
     }
 
-    private void setOnClickListener() {
-        mListener
-    }
 
     /**
      * Init the List of neighbours
      */
     private void initList() {
         mNeighbours = mApiService.getNeighbours();
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
+        mMyNeighbourRecyclerViewAdapter.notifyDataSetChanged();
+       /* mMyNeighbourRecyclerViewAdapter = new MyNeighbourRecyclerViewAdapter(mNeighbours, (MyNeighbourRecyclerViewAdapter.OnItemClickListener) this);*/
     }
 
     @Override
@@ -97,4 +102,11 @@ public class NeighbourFragment extends Fragment {
         initList();
     }
 
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(getContext(), DetailsNeighbourActivity.class);
+        intent.putExtra("selected_item", (Parcelable) mNeighbours.get(position));
+        startActivity(intent);
+
+    }
 }

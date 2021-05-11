@@ -4,149 +4,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D8D8D8"
-    android:backgroundTint="#00FFFFFF"
-    android:clipChildren="false"
-    android:clipToPadding="false"
-    tools:context=".DetailsNeighbourActivity"
-    tools:ignore="ExtraText">
+    android:background="@color/colorGray"
+    tools:context=".ui.neighbour_list.DetailsNeighbourActivity">
 
     <ImageView
-        android:id="@+id/DetailsPhotoFragment"
+        android:id="@+id/detailsPhotoFragment"
         android:layout_width="match_parent"
         android:layout_height="290dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         tools:src="@tools:sample/backgrounds/scenic" />
 
     <TextView
-        android:id="@+id/DetailsPhotoName"
-        android:layout_width="232dp"
-        android:layout_height="37dp"
+        android:id="@+id/detailsPhotoName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:text="Prénom"
         android:textColor="@android:color/white"
         android:textSize="28sp"
-        app:layout_constraintBottom_toBottomOf="@+id/DetailsPhotoFragment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/DetailsPhotoFragment"
-        app:layout_constraintVertical_bias="0.893"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="463dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/detailsPhotoFragment"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/frameLayout"
-        android:layout_width="380dp"
-        android:layout_height="210dp"
+        android:id="@+id/userContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:background="@android:color/white"
         android:elevation="6dp"
         app:cardCornerRadius="3dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DetailsPhotoFragment"
-        app:layout_constraintVertical_bias="0.061">
+        app:layout_constraintTop_toBottomOf="@+id/detailsPhotoFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:padding="12dp">
 
             <TextView
-
-                android:id="@+id/PrenomInfos"
-                android:layout_width="278dp"
-                android:layout_height="41dp"
+                android:id="@+id/prenomInfos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Prénom"
                 android:textColor="@android:color/black"
                 android:textSize="26sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.156"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.029" />
-
-            <ImageView
-                android:id="@+id/imageAdressInfo"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/ic_localisation_rose"
-                app:layout_constraintBottom_toBottomOf="@+id/adressInfo"
-                app:layout_constraintEnd_toStartOf="@+id/adressInfo"
-                app:layout_constraintHorizontal_bias="0.522"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <ImageView
-                android:id="@+id/imagePhoneInfo"
-                android:layout_width="26dp"
-                android:layout_height="27dp"
-                android:layout_marginStart="16dp"
-                android:src="@drawable/ic_tel"
-                app:layout_constraintBottom_toTopOf="@+id/imageWebInfo"
-                app:layout_constraintEnd_toStartOf="@+id/phoneInfo"
-                app:layout_constraintHorizontal_bias="0.259"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageAdressInfo"
-                app:layout_constraintVertical_bias="0.457" />
-
-            <ImageView
-                android:id="@+id/imageWebInfo"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/ic_web"
-                app:layout_constraintBottom_toBottomOf="@+id/webInfo"
-                app:layout_constraintEnd_toStartOf="@+id/webInfo"
-                app:layout_constraintHorizontal_bias="0.512"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/adressInfo"
-                android:layout_width="286dp"
-                android:layout_height="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:drawablePadding="10dp"
                 android:paddingTop="3dp"
                 android:text="Adress"
                 android:textColor="#7E7E7E"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.734"
+                app:drawableStartCompat="@drawable/ic_localisation_rose"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/PrenomInfos" />
+                app:layout_constraintTop_toBottomOf="@+id/prenomInfos"/>
 
             <TextView
                 android:id="@+id/phoneInfo"
-                android:layout_width="291dp"
-                android:layout_height="26dp"
-                android:layout_marginTop="20dp"
-                android:paddingTop="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:drawablePadding="10dp"
+                android:paddingTop="3dp"
                 android:text="Phone"
-                android:textColor="#838383"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.775"
+                android:textColor="#7E7E7E"
+                app:drawableStartCompat="@drawable/ic_tel"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/adressInfo"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/adressInfo" />
 
             <TextView
                 android:id="@+id/webInfo"
-                android:layout_width="286dp"
-                android:layout_height="25dp"
-                android:paddingTop="2dp"
-                android:text="WebInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:drawablePadding="10dp"
+                android:paddingTop="3dp"
+                android:text="Web infos"
                 android:textColor="#7E7E7E"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.734"
+                app:drawableStartCompat="@drawable/ic_web"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/phoneInfo"
-                app:layout_constraintVertical_bias="0.437" />
+                app:layout_constraintTop_toBottomOf="@+id/phoneInfo" />
 
             <View
                 android:id="@+id/dividerInfos"
@@ -155,49 +100,35 @@
                 android:background="?android:attr/listDivider"
                 app:layout_constraintBottom_toTopOf="@+id/adressInfo"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/PrenomInfos"
-                app:layout_constraintVertical_bias="0.0" />
-
+                app:layout_constraintTop_toBottomOf="@+id/prenomInfos" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </androidx.cardview.widget.CardView>
 
-
     <androidx.cardview.widget.CardView
-        android:layout_width="380dp"
-        android:layout_height="170dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:background="@android:color/white"
         android:elevation="6dp"
         app:cardCornerRadius="3dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
-        app:layout_constraintVertical_bias="0.185">
+        app:layout_constraintTop_toBottomOf="@id/userContent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:layout_height="wrap_content"
+            android:padding="10dp">
 
             <TextView
-
                 android:id="@+id/aboutMeTitle"
-                android:layout_width="278dp"
-                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:paddingLeft="10dp"
                 android:text="A propos de moi"
                 android:textColor="#000000"
                 android:textSize="26sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -218,22 +149,13 @@
                 android:id="@+id/aboutMeDescription"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:paddingLeft="8dp"
-                android:paddingTop="10dp"
-                android:paddingRight="8dp"
-                android:paddingBottom="8dp"
+                android:padding="8dp"
                 android:text="Je suis un texte de démo."
                 android:textColor="#7E7E7E"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/aboutMeTitle" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </androidx.cardview.widget.CardView>
 
     <ImageButton
@@ -243,25 +165,19 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/white_go_back"
-        android:foreground="@drawable/white_go_back"
         android:foregroundTintMode="src_in"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/DetailsPhotoFragment" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/favoriteFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="232dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/white_favorite_fab"
-        android:clickable="true"
-        android:foreground="@drawable/white_favorite_fab"
-        android:foregroundTint="#FFFFFF"
-        app:backgroundTint="#00FFFFFF"
+        android:layout_margin="10dp"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@id/detailsPhotoFragment"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:focusable="true" />
-
+        app:layout_constraintTop_toBottomOf="@id/detailsPhotoFragment"
+        app:srcCompat="@drawable/white_favorite_fab" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

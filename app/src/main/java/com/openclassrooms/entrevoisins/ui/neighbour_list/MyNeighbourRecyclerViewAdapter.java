@@ -3,6 +3,7 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,30 +28,27 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
 
     private final List<Neighbour> mNeighbours;
     private Context context;
-    private OnItemClickListener mListener;
-
-
+    private OnItemClickListener mItemClickListener;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
-
-
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        mListener = listener;
+    public void setOnItemClickListener(OnItemClickListener itemListener) {
+        mItemClickListener = itemListener;
     }
 
-    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items, OnItemClickListener mListener) {
+    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items, OnItemClickListener itemClickListener) {
         mNeighbours = items;
-        this.mListener = mListener;
+        this.mItemClickListener = itemClickListener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_neighbour, parent, false);
-        return new ViewHolder(view);
+        ViewHolder evh = new ViewHolder(view, mItemClickListener);
+        return evh;
     }
 
     @Override
@@ -83,17 +81,28 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         public TextView mNeighbourName;
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
-        public OnItemClickListener mListener;
+        public OnItemClickListener itemClickListener;
 
-        public ViewHolder(View view, final OnItemClickListener mListener) {
+        public ViewHolder(View view, OnItemClickListener itemClickListener) {
             super(view);
             ButterKnife.bind(this, view);
-            view.setOnClickListener(this);
+            this.itemClickListener = itemClickListener;
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(itemClickListener !=null) {
+                        int position = getAdapterPosition();
+                        if(position !=RecyclerView.NO_POSITION) {
+                            itemClickListener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
 
         @Override
         public void onClick(View v) {
-            mListener.onItemClick(getAbsoluteAdapterPosition());
+            itemClickListener.onItemClick(getAbsoluteAdapterPosition());
         }
     }
 }

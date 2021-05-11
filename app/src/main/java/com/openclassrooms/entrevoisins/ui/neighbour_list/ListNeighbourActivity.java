@@ -2,6 +2,8 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+
 import com.google.android.material.tabs.TabLayout;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +11,9 @@ import androidx.appcompat.widget.Toolbar;
 
 
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.model.Neighbour;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,8 +30,12 @@ public class ListNeighbourActivity extends AppCompatActivity implements MyNeighb
     ViewPager mViewPager;
 
     ListNeighbourPagerAdapter mPagerAdapter;
+    private List<Neighbour> mNeighbours;
+
 
     private MyNeighbourRecyclerViewAdapter.OnItemClickListener mListener;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +48,6 @@ public class ListNeighbourActivity extends AppCompatActivity implements MyNeighb
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-
-
     }
 
     @OnClick(R.id.add_neighbour)
@@ -51,14 +58,10 @@ public class ListNeighbourActivity extends AppCompatActivity implements MyNeighb
 
     @Override
     public void onItemClick(int position) {
-        Intent intent = new Intent(ListNeighbourActivity.this, DetailsNeighbourActivity.class);
-        intent.putExtra("selected_item", mNeighbours.get(position));
-        startActivity(intent);
+
+       /* Intent intent = new Intent(ListNeighbourActivity.this, DetailsNeighbourActivity.class);
+        intent.putExtra("selected_item", (Parcelable) mNeighbours.get(position));
+        startActivity(intent);*/
     }
 
-
-    @Override
-    public void onDeleteClick(int position) {
-
-    }
 }
