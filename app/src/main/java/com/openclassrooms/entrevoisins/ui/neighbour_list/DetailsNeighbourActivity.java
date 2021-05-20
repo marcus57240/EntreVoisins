@@ -73,11 +73,15 @@ public class DetailsNeighbourActivity extends Activity {
         mFavoriteFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isClicked) { isClicked = true; }
+                if(!isClicked) {
+                    isClicked = true; }
                 else { mFavoriteFab.setElevation(0); }
-
             }
 
+            @OnClick(R.id.favoriteFab)
+            void addFavorite() {
+
+            }
         });
 
     }

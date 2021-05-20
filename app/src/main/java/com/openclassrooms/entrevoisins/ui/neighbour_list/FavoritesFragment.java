@@ -27,10 +27,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerViewAdapter.OnItemClickListener {
+public class FavoritesFragment extends Fragment implements MyNeighbourRecyclerViewAdapter.OnItemClickListener {
 
     private NeighbourApiService mApiService;
-    private List<Neighbour> mNeighbours = new ArrayList<>();
+    private List<Neighbour> mFavorites = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private MyNeighbourRecyclerViewAdapter mMyNeighbourRecyclerViewAdapter;
 
@@ -40,8 +40,8 @@ public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerVi
      * Create and return a new instance
      * @return @{@link NeighbourFragment}
      */
-    public static NeighbourFragment newInstance() {
-        NeighbourFragment fragment = new NeighbourFragment();
+    public static FavoritesFragment newInstance() {
+        FavoritesFragment fragment = new FavoritesFragment();
         return fragment;
     }
 
@@ -54,7 +54,7 @@ public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerVi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_neighbour_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_favorites_list, container, false);
         Context context = view.getContext();
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -69,9 +69,9 @@ public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerVi
      * Init the List of neighbours
      */
     private void initList() {
-        mNeighbours = mApiService.getNeighbours();
+        mFavorites = mApiService.getNeighbours();
         mMyNeighbourRecyclerViewAdapter.notifyDataSetChanged();
-       /* mMyNeighbourRecyclerViewAdapter = new MyNeighbourRecyclerViewAdapter(mNeighbours, (MyNeighbourRecyclerViewAdapter.OnItemClickListener) this);*/
+        /* mMyNeighbourRecyclerViewAdapter = new MyNeighbourRecyclerViewAdapter(mNeighbours, (MyNeighbourRecyclerViewAdapter.OnItemClickListener) this);*/
     }
 
     @Override
@@ -105,7 +105,7 @@ public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerVi
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(getContext(), DetailsNeighbourActivity.class);
-        intent.putExtra("selected_item", mNeighbours.get(position));
+        intent.putExtra("selected_item", mFavorites.get(position));
         startActivity(intent);
 
     }

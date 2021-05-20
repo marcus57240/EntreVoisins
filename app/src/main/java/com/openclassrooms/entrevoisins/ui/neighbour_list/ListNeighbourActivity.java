@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -45,6 +46,10 @@ public class ListNeighbourActivity extends AppCompatActivity implements MyNeighb
 
         setSupportActionBar(mToolbar);
         mPagerAdapter = new ListNeighbourPagerAdapter(getSupportFragmentManager());
+
+        mPagerAdapter.AddFragment(new FavoritesFragment(), "Favorites");
+        mPagerAdapter.AddFragment(new NeighbourFragment(), "Neighbours");
+
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
@@ -56,12 +61,10 @@ public class ListNeighbourActivity extends AppCompatActivity implements MyNeighb
     }
 
 
+
     @Override
     public void onItemClick(int position) {
 
-       /* Intent intent = new Intent(ListNeighbourActivity.this, DetailsNeighbourActivity.class);
-        intent.putExtra("selected_item", (Parcelable) mNeighbours.get(position));
-        startActivity(intent);*/
     }
 
 }
