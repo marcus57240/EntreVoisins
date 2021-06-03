@@ -30,14 +30,13 @@ public class Neighbour implements Parcelable {
 
     private String webSite;
 
+    private boolean favorite;
+
     /**
      * Constructor
-     * @param id
-     * @param name
-     * @param avatarUrl
      */
     public Neighbour(long id, String name, String avatarUrl, String address,
-                     String phoneNumber, String aboutMe, String webSite) {
+                     String phoneNumber, String aboutMe, String webSite, boolean favorite) {
         this.id = id;
         this.name = name;
         this.avatarUrl = avatarUrl;
@@ -45,6 +44,7 @@ public class Neighbour implements Parcelable {
         this.phoneNumber = phoneNumber;
         this.aboutMe = aboutMe;
         this.webSite = webSite;
+        this.favorite = favorite;
     }
 
     protected Neighbour(Parcel in) {
@@ -55,6 +55,7 @@ public class Neighbour implements Parcelable {
         phoneNumber = in.readString();
         aboutMe = in.readString();
         webSite = in.readString();
+        favorite = in.readByte() != 0;
     }
 
     public static final Creator<Neighbour> CREATOR = new Creator<Neighbour>() {
@@ -68,6 +69,23 @@ public class Neighbour implements Parcelable {
             return new Neighbour[size];
         }
     };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeString(name);
+        dest.writeString(avatarUrl);
+        dest.writeString(address);
+        dest.writeString(phoneNumber);
+        dest.writeString(aboutMe);
+        dest.writeString(webSite);
+        dest.writeByte((byte) (favorite ? 1 : 0));
+    }
 
     public long getId() {
         return id;
@@ -117,9 +135,25 @@ public class Neighbour implements Parcelable {
         this.aboutMe = aboutMe;
     }
 
-    public String getWebSite() { return webSite; }
+    public String getWebSite() {
+        return webSite;
+    }
 
-    public void setWebSite(String webSite) { this.webSite = webSite; }
+    public void setWebSite(String webSite) {
+        this.webSite = webSite;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
+    public static Creator<Neighbour> getCREATOR() {
+        return CREATOR;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -131,22 +165,6 @@ public class Neighbour implements Parcelable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(id);
-        dest.writeString(name);
-        dest.writeString(avatarUrl);
-        dest.writeString(address);
-        dest.writeString(phoneNumber);
-        dest.writeString(aboutMe);
-        dest.writeString(webSite);
+        return Objects.hash(id, name, avatarUrl, address, phoneNumber, aboutMe, webSite, favorite);
     }
 }

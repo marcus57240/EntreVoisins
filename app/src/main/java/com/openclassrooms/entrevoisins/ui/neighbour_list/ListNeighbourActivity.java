@@ -47,8 +47,8 @@ public class ListNeighbourActivity extends AppCompatActivity implements MyNeighb
         setSupportActionBar(mToolbar);
         mPagerAdapter = new ListNeighbourPagerAdapter(getSupportFragmentManager());
 
-        mPagerAdapter.AddFragment(new FavoritesFragment(), "Favorites");
-        mPagerAdapter.AddFragment(new NeighbourFragment(), "Neighbours");
+        mPagerAdapter.addFragment(new NeighbourFragment());
+        mPagerAdapter.addFragment(new FavoritesFragment());
 
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));

@@ -38,7 +38,7 @@ public class FavoritesFragment extends Fragment implements MyNeighbourRecyclerVi
 
     /**
      * Create and return a new instance
-     * @return @{@link NeighbourFragment}
+     * @return @{@link FavoritesFragment}
      */
     public static FavoritesFragment newInstance() {
         FavoritesFragment fragment = new FavoritesFragment();
@@ -59,7 +59,7 @@ public class FavoritesFragment extends Fragment implements MyNeighbourRecyclerVi
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        mMyNeighbourRecyclerViewAdapter = new MyNeighbourRecyclerViewAdapter(mApiService.getNeighbours(), (MyNeighbourRecyclerViewAdapter.OnItemClickListener) this);
+        mMyNeighbourRecyclerViewAdapter = new MyNeighbourRecyclerViewAdapter(mApiService.getFavoritesNeighbours(), (MyNeighbourRecyclerViewAdapter.OnItemClickListener) this);
         mRecyclerView.setAdapter(mMyNeighbourRecyclerViewAdapter);
         return view;
     }
@@ -69,7 +69,7 @@ public class FavoritesFragment extends Fragment implements MyNeighbourRecyclerVi
      * Init the List of neighbours
      */
     private void initList() {
-        mFavorites = mApiService.getNeighbours();
+        mFavorites = mApiService.getFavoritesNeighbours();
         mMyNeighbourRecyclerViewAdapter.notifyDataSetChanged();
         /* mMyNeighbourRecyclerViewAdapter = new MyNeighbourRecyclerViewAdapter(mNeighbours, (MyNeighbourRecyclerViewAdapter.OnItemClickListener) this);*/
     }

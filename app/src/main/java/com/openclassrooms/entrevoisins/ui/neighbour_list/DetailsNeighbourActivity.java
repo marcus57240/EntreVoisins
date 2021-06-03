@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.Nullable;
@@ -47,7 +48,7 @@ public class DetailsNeighbourActivity extends Activity {
     @BindView(R.id.favoriteFab)
     FloatingActionButton mFavoriteFab;
 
-    private boolean isClicked;
+    public boolean isClicked;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,17 +72,19 @@ public class DetailsNeighbourActivity extends Activity {
         isClicked = false;
 
         mFavoriteFab.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 if(!isClicked) {
-                    isClicked = true; }
+                    isClicked = true;
+                }
                 else { mFavoriteFab.setElevation(0); }
             }
 
             @OnClick(R.id.favoriteFab)
             void addFavorite() {
-
             }
+
         });
 
     }
