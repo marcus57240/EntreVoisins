@@ -175,6 +175,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         app:backgroundTint="@color/colorPrimary"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintBottom_toBottomOf="@id/detailsPhotoFragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/detailsPhotoFragment"

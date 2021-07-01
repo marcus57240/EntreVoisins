@@ -2,6 +2,9 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 
 import butterknife.BindView;
@@ -20,8 +24,13 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourPagerAdapter;import com.openclassrooms.entrevoisins.R;
+
+import java.util.List;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -48,15 +57,25 @@ public class DetailsNeighbourActivity extends Activity {
     @BindView(R.id.favoriteFab)
     FloatingActionButton mFavoriteFab;
 
-    public boolean isClicked;
+    private Neighbour neighbour;
+    private NeighbourApiService mApiService;
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_neighbour);
         ButterKnife.bind(this);
 
+        mApiService = DI.getNeighbourApiService();
+
+        initNeighbour();
+
+        initListener();
+    }
+
+    private void initNeighbour() {
         if(getIntent().hasExtra("selected_item")) {
-            Neighbour neighbour = getIntent().getParcelableExtra("selected_item");
+            neighbour = getIntent().getParcelableExtra("selected_item");
             mDetailPhotoName.setText(neighbour.getName());
             mPhoneInfo.setText(neighbour.getPhoneNumber());
             mPrenomInfos.setText(neighbour.getName());
@@ -67,26 +86,45 @@ public class DetailsNeighbourActivity extends Activity {
                     .with(getApplicationContext())
                     .load(neighbour.getAvatarUrl())
                     .into(mDetailPhotoFragment);
+
+            if (neighbour.isFavorite()) { setFAByellow(); }
+            else { setFABblue(); }
         }
 
-        isClicked = false;
+    }
 
+    private void initListener() {
         mFavoriteFab.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-                if(!isClicked) {
-                    isClicked = true;
+                if (!neighbour.isFavorite()) {
+                    mApiService.addFavoriteNeighbour(neighbour);
+                    setFAByellow();
+                    Toast.makeText(getApplicationContext(), "added", Toast.LENGTH_SHORT).show();
                 }
-                else { mFavoriteFab.setElevation(0); }
+                else {
+                    mApiService.deleteFavoriteNeighbour(neighbour);
+                    setFABblue();
+                    Toast.makeText(getApplicationContext(), "removed", Toast.LENGTH_SHORT).show();
+                }
             }
-
-            @OnClick(R.id.favoriteFab)
-            void addFavorite() {
-            }
-
         });
 
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
+
+    private void setFABblue() {
+        mFavoriteFab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
+    }
+
+    private void setFAByellow() {
+        mFavoriteFab.setBackgroundTintList(ColorStateList.valueOf(Color.YELLOW));
+    }
+
 
 }
