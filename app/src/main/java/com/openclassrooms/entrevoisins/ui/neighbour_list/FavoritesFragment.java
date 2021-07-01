@@ -31,7 +31,7 @@ import java.util.List;
 public class FavoritesFragment extends Fragment implements MyNeighbourRecyclerViewAdapter.OnItemClickListener {
 
     private NeighbourApiService mApiService;
-    private List<Neighbour> mFavorites = new ArrayList<>();
+    private List<Neighbour> mNeighbours = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private MyNeighbourRecyclerViewAdapter mMyNeighbourRecyclerViewAdapter;
 
@@ -70,7 +70,7 @@ public class FavoritesFragment extends Fragment implements MyNeighbourRecyclerVi
      * Init the List of neighbours
      */
     private void initList() {
-        mFavorites = mApiService.getFavoritesNeighbours();
+        mNeighbours = mApiService.getFavoritesNeighbours();
         mMyNeighbourRecyclerViewAdapter.notifyDataSetChanged();
         /* mMyNeighbourRecyclerViewAdapter = new MyNeighbourRecyclerViewAdapter(mNeighbours, (MyNeighbourRecyclerViewAdapter.OnItemClickListener) this);*/
     }
@@ -106,7 +106,7 @@ public class FavoritesFragment extends Fragment implements MyNeighbourRecyclerVi
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(getContext(), DetailsNeighbourActivity.class);
-        intent.putExtra("selected_item", mFavorites.get(position));
+        intent.putExtra("selected_item", mNeighbours.get(position));
         startActivity(intent);
 
     }
