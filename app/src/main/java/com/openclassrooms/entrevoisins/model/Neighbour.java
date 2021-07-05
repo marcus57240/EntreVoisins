@@ -167,4 +167,13 @@ public class Neighbour implements Parcelable {
     public int hashCode() {
         return Objects.hash(id, name, avatarUrl, address, phoneNumber, aboutMe, webSite, favorite);
     }
+
+    @Override
+    public String toString() {
+        return "Neighbour{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", favorite=" + favorite +
+                '}';
+    }
 }

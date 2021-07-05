@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,11 +28,12 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.security.auth.login.LoginException;
+
 
 public class FavoritesFragment extends Fragment implements MyNeighbourRecyclerViewAdapter.OnItemClickListener {
 
     private NeighbourApiService mApiService;
-    private List<Neighbour> mNeighbours = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private MyNeighbourRecyclerViewAdapter mMyNeighbourRecyclerViewAdapter;
 
@@ -60,19 +62,14 @@ public class FavoritesFragment extends Fragment implements MyNeighbourRecyclerVi
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        mMyNeighbourRecyclerViewAdapter = new MyNeighbourRecyclerViewAdapter(mApiService.getFavoritesNeighbours(), (MyNeighbourRecyclerViewAdapter.OnItemClickListener) this);
-        mRecyclerView.setAdapter(mMyNeighbourRecyclerViewAdapter);
         return view;
     }
-
-
     /**
      * Init the List of neighbours
      */
     private void initList() {
-        mNeighbours = mApiService.getFavoritesNeighbours();
-        mMyNeighbourRecyclerViewAdapter.notifyDataSetChanged();
-        /* mMyNeighbourRecyclerViewAdapter = new MyNeighbourRecyclerViewAdapter(mNeighbours, (MyNeighbourRecyclerViewAdapter.OnItemClickListener) this);*/
+        mMyNeighbourRecyclerViewAdapter = new MyNeighbourRecyclerViewAdapter(mApiService.getFavoritesNeighbours(),this);
+        mRecyclerView.setAdapter(mMyNeighbourRecyclerViewAdapter);
     }
 
     @Override
@@ -106,7 +103,7 @@ public class FavoritesFragment extends Fragment implements MyNeighbourRecyclerVi
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(getContext(), DetailsNeighbourActivity.class);
-        intent.putExtra("selected_item", mNeighbours.get(position));
+        intent.putExtra("selected_item", mApiService.getFavoritesNeighbours().get(position));
         startActivity(intent);
 
     }
