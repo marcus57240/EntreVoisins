@@ -57,4 +57,5 @@ public class NeighbourServiceTest {
         assertFalse(service.getFavoritesNeighbours().contains(neighbourToRemove));
     }
 
+
 }

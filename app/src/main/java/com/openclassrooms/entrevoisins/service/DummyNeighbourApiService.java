@@ -31,7 +31,6 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
             }
         }
         return favorites;
-
     }
 
     /**

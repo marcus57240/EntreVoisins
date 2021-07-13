@@ -1,15 +1,11 @@
 package com.openclassrooms.entrevoisins.neighbour_list;
 
-
 import android.icu.text.Transliterator;
 
 import org.hamcrest.core.AllOf;
 import org.junit.Before;
 
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.swipeLeft;
-import static androidx.test.espresso.action.ViewActions.swipeRight;
-import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import com.openclassrooms.entrevoisins.di.DI;
@@ -43,9 +39,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.core.IsNull.notNullValue;
 
-@RunWith(AndroidJUnit4.class)
-
-public class NeighbourFavoritesListTest {
+public class DetailsNeighbourActivityTest {
 
     private ListNeighbourActivity mActivity;
     private NeighbourApiService service;
@@ -72,47 +66,23 @@ public class NeighbourFavoritesListTest {
                 .check(matches(hasMinimumChildCount(1)));
     }
 
-    /**we ensure that our favorite list is empty when app is launched
-     * opening on the mainActivity who load and shows 'My Neighbours' List,
-     * with no neighbour in the 'favorites' tab list.*/
+    /** We check that clicking on item in recyclerview list launch DetailsNeighbourActivity
+     * and display it*/
     @Test
-    public void favorite_list_starts_empty() {
+    public void navigateToDetailActivity() {
 
+        //'My Neighbours' list should be displayed.
         onView(withId(R.id.list_neighbours)).check(matches(isDisplayed()));
-        onView(withId(R.id.list_neighbours)).check(matches(hasMinimumChildCount(1)));
-        onView(withId(R.id.main_content)).perform(swipeLeft());
-        onView(withId(R.id.list_favorites)).check(matches(isDisplayed()));
-        onView(withId(R.id.list_favorites)).check(matches(hasChildCount(0)));
-    }
-
-    /**after checking that the 'favorites' list is empty as expected when our app is launched,
-     *we simulate the 'add-to-favorite' action of a neighbour: First we click on a neighbour item
-     * in our Neighbours list, this action should open the detailsNeighbour of this item,
-     * then we perform a click on the Favorite FAB, then we ensure that this neighbour is well displayed
-     * when we swipe on the 'favorites' tab list, by clicking on the back button to come back
-     * to the Neighbours list, and swiping to the 'favorites' tab list; then we simulate the reverse action:
-     * removing this neighbour from 'favorite' list by clicking on the favorite FAB,
-     * and checking that this neighbour is removed from 'favorite' list as expected.*/
-    @Test
-    public void favorite_FAB_add_and_remove_to_favorites_list() {
-
-        onView(withId(R.id.list_neighbours)).check(matches(isDisplayed()));
+        //we click on the item at the 12th position in our Neighbours list (recyclerView)
         onView(withId(R.id.list_neighbours))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(11, click()));
+        //after clicking on this item; the DetailsNeighbourActivity should be launched.
+        //So we can ensure this by checking that 'detailsNeighbour' layout is displayed, as expected.
         onView(withId(R.id.detailsNeighbour)).check(matches(isDisplayed()));
-        onView(withId(R.id.favoriteFab)).perform(click());
-        onView(withId(R.id.backButton)).perform(click());
-        onView(withId(R.id.list_neighbours)).check(matches(isDisplayed()));
-        onView(withId(R.id.main_content)).perform(swipeLeft());
-        onView(withId(R.id.list_favorites)).check(matches(isDisplayed()));
-        onView(withId(R.id.list_favorites)).check(matches(hasChildCount(1)));
-        onView(withId(R.id.list_favorites))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-        onView(withId(R.id.detailsNeighbour)).check(matches(isDisplayed()));
-        onView(withId(R.id.favoriteFab)).perform(click());
-        onView(withId(R.id.backButton)).perform(click());
-        onView(withId(R.id.list_favorites)).check(matches(isDisplayed()));
-        onView(withId(R.id.list_favorites)).check(matches(hasChildCount(0)));
+        //Finally, we ensure that the datas displayed by the DetailsNeighbourActivity are correct,
+        //by comparing the 'prenomInfos' textView content who should matches with "Ludovic",
+        //who is the Neighbour's name we find at the 12th position in our DUMMY_NEIGHBOURS list.
+        onView(withId(R.id.prenomInfos)).check(matches(withText("Ludovic")));
 
     }
 }

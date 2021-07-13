@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorGray"
-    tools:context=".ui.neighbour_list.DetailsNeighbourActivity">
+    tools:context=".ui.neighbour_list.DetailsNeighbourActivity"
+    android:id="@+id/detailsNeighbour">
 
     <ImageView
         android:id="@+id/detailsPhotoFragment"
