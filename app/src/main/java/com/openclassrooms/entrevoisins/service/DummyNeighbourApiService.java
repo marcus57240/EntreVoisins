@@ -21,6 +21,9 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
         return neighbours;
     }
 
+    /**initiating a new Arraylist, using a "for" loop, to define that this new list
+     * have to display neighbours set as "favorite" ONLY, by checking the "favorite" boolean
+     * parameter of each neighbour, using their positions.*/
     public List<Neighbour> getFavoritesNeighbours() {
         List<Neighbour> favorites = new ArrayList<>();
 
@@ -41,12 +44,19 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
         neighbours.remove(neighbour);
     }
 
+    /**this method will be called when FAB button is clicked, to change the neighbour's favorite status
+     * from true into false (become no-favorite)
+     * @param neighbour
+     */
     @Override
     public void deleteFavoriteNeighbour(Neighbour neighbour) {
         int position = neighbours.indexOf(neighbour);
         neighbours.get(position).setFavorite(false);
     }
-
+    /**this method will be called when FAB button is clicked, to change the neighbour's favorite status
+     * from false into true (become favorite)
+     * @param neighbour
+     */
     @Override
     public void addFavoriteNeighbour(Neighbour neighbour) {
         int position = neighbours.indexOf(neighbour);

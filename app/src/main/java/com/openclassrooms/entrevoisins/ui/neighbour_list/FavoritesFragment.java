@@ -37,8 +37,6 @@ public class FavoritesFragment extends Fragment implements MyNeighbourRecyclerVi
     private RecyclerView mRecyclerView;
     private MyNeighbourRecyclerViewAdapter mMyNeighbourRecyclerViewAdapter;
 
-
-
     /**
      * Create and return a new instance
      * @return @{@link FavoritesFragment}
@@ -100,6 +98,10 @@ public class FavoritesFragment extends Fragment implements MyNeighbourRecyclerVi
         initList();
     }
 
+    /**method used to launch the DetailsNeighbourActivity page, when a neighbour item
+     * is clicked in the list.
+     * @param position
+     */
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(getContext(), DetailsNeighbourActivity.class);

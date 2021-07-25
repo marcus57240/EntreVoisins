@@ -3,7 +3,7 @@ package com.openclassrooms.entrevoisins.events;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 
 /**
- * Event fired when a user deletes a Neighbour
+ * Event fired when a user remove a Neighbour from favorites
  */
 public class DeleteFavoriteEvent {
 
@@ -16,6 +16,7 @@ public class DeleteFavoriteEvent {
      * Constructor.
      * @param neighbour
      */
+
     public DeleteFavoriteEvent(Neighbour neighbour) {
         this.neighbour = neighbour;
     }

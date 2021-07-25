@@ -125,6 +125,4 @@ public class DetailsNeighbourActivity extends Activity {
     private void setFAByellow() {
         mFavoriteFab.setBackgroundTintList(ColorStateList.valueOf(Color.YELLOW));
     }
-
-
 }

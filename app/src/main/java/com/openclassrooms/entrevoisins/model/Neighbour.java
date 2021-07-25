@@ -28,8 +28,10 @@ public class Neighbour implements Parcelable {
     /** About me */
     private String aboutMe;
 
+    /** webSite infos, displayed ONLY in the DetailsNeighbour page*/
     private String webSite;
 
+    /** adding a boolean parameter, used to define if a neighbour is -or not- set as "favorite"*/
     private boolean favorite;
 
     /**
