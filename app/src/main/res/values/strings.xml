@@ -5,4 +5,6 @@
     <string name="activity_new_neighbour">New neighbour</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="added_label">Added</string>
+    <string name="removed_label">Removed</string>
 </resources>

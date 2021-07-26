@@ -1,8 +1,8 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
-import android.content.Intent;
+
 import android.os.Bundle;
-import android.os.Parcelable;
+
 
 import com.google.android.material.tabs.TabLayout;
 import androidx.viewpager.widget.ViewPager;
@@ -13,7 +13,6 @@ import androidx.appcompat.widget.Toolbar;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
